@@ -1,0 +1,25 @@
+$card-border-radius: 0px !default;
+
+@mixin card {
+  border-radius: $card-border-radius;
+  width: 100%;
+  background-color: $white;
+  margin-bottom: 20px;
+  border: 1px solid $gray-light;
+}
+
+@mixin card-md {
+  padding: 15px;
+}
+
+@mixin card-hover {
+  @include transitionStyles;
+
+  @include hover-focus-active {
+    background-color: darken($white, 2%);
+  }
+}
+
+@mixin card-shadow {
+  box-shadow: $box-shadow;
+}

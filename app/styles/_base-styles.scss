@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i');
+
+$font-family-sans-serif: 'Open Sans', Helvetica, Arial, sans-serif;
+$decorated-font: 'HappyFox', Helvetica, Arial, sans-serif;
+$numbers-font: 'FreestyleScript', Helvetica, Arial, sans-serif;
+$font-size-global: 16px;
+
+html {
+  font-size: $font-size-global;
+  overflow-x: hidden;
+}
+
+body {
+  font-size: 100%;
+  font-weight: 400;
+  font-family: $font-family-sans-serif;
+  background: $white;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.footer {
+  /* Enable hardware acceleration to fix laggy transitions */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+@font-face {
+  font-family: 'HappyFox';
+  src: url('../fonts/HappyFox-Condensed.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/HappyFox-Condensed.otf') format('opentype'),
+  url('../fonts/HappyFox-Condensed.woff') format('woff'),
+  url('../fonts/HappyFox-Condensed.ttf') format('truetype'),
+  url('../fonts/HappyFox-Condensed.svg#HappyFox-Condensed') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FreestyleScript';
+  src: url('../fonts/FreestyleScript-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/FreestyleScript-Regular.woff') format('woff'),
+  url('../fonts/FreestyleScript-Regular.ttf') format('truetype'),
+  url('../fonts/FreestyleScript-Regular.svg#FreestyleScript-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  @include link-variant($brand-orange-light);
+}

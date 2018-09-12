@@ -1,0 +1,62 @@
+//font
+$font-size-base: 1rem;
+$font-size-xl: ($font-size-base * 2);
+$font-size-lg: ($font-size-base * 1.875);
+$font-size-md: ($font-size-base * 1.125);
+$font-size-sm: ($font-size-base * .875);
+$font-size-xs: ($font-size-base * .75);
+
+$font-variants: (
+        base: (
+                base: (
+                        font-size: $font-size-base,
+                        line-height: $font-size-base * 1.5
+                ),
+                sm: (
+                        font-size: $font-size-sm,
+                        line-height: $font-size-sm * 1.75,
+                )
+        ),
+        xs: (
+                base: (
+                        font-size: $font-size-xs,
+                        line-height: $font-size-xs * 1.3,
+                )
+        ),
+        sm: (
+                base: (
+                        font-size: $font-size-sm,
+                        line-height: $font-size-base * 1.5,
+                )
+        ),
+        md: (
+                base: (
+                        font-size: $font-size-md,
+                        line-height: $font-size-xl,
+                ),
+                sm: (
+                        font-size: $font-size-base,
+                        line-height: $font-size-base * 1.75,
+                )
+        ),
+        lg: (
+                base: (
+                        font-size: $font-size-lg,
+                        line-height: $font-size-lg * 1.2,
+                ),
+                sm: (
+                        font-size: $font-size-base * 1.6,
+                        line-height: $font-size-base * 2,
+                )
+        ),
+        xl: (
+                base: (
+                        font-size: $font-size-xl,
+                        line-height: $font-size-xl * 1.2,
+                ),
+                sm: (
+                        font-size: $font-size-base * 1.8,
+                        line-height: $font-size-base * 2.1,
+                )
+        ),
+);
