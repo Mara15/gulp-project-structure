@@ -1,18 +1,22 @@
-const gulp = require('gulp');
-const gulpLoadPlugins = require('gulp-load-plugins');
-const browserSync = require('browser-sync').create();
-const del = require('del');
-const runSequence = require('run-sequence');
-const fileinclude = require('gulp-file-include');
-const autoprefixer = require('gulp-autoprefixer');
-const uglify = require('gulp-uglify');
+'use strict';
+
+import gulp from 'gulp';
+import gulpLoadPlugins from 'gulp-load-plugins';
+import del from 'del';
+import runSequence from 'run-sequence';
+import fileinclude from 'gulp-file-include';
+import browserSyncPachage from 'browser-sync';
+import '@babel/register';
+import 'gulp-autoprefixer';
+import 'gulp-uglify';
 
 const $ = gulpLoadPlugins();
-const reload = browserSync.reload;
+const reload = browserSyncPachage.reload;
+const browserSync = browserSyncPachage.create();
 
-var dev = true;
+let dev = true;
 
-var paths = {
+const paths = {
   scripts: {
     input: 'app/scripts/**/*.js',
     tmp: '.tmp/scripts/',
@@ -60,7 +64,7 @@ var paths = {
   }
 };
 
-gulp.task('styles', function() {
+gulp.task('styles', () => {
   return gulp.src(paths.styles.input)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -75,7 +79,7 @@ gulp.task('styles', function() {
     .pipe(reload({ stream: true }));
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', () => {
   return gulp.src(paths.scripts.input)
     .pipe($.plumber())
     .pipe($.babel())
@@ -85,7 +89,7 @@ gulp.task('scripts', function() {
     .pipe(reload({ stream: true }));
 });
 
-gulp.task('fileinclude', function() {
+gulp.task('fileinclude', () => {
   return gulp.src(paths.html.input)
     .pipe($.plumber())
     .pipe(fileinclude())
@@ -93,7 +97,7 @@ gulp.task('fileinclude', function() {
     .pipe(browserSync.stream());
 });
 
-function lint(files, options) {
+function lint(files) {
   return gulp.src(files)
     .pipe($.eslint({ fix: true }))
     .pipe(reload({ stream: true, once: true }))
@@ -101,7 +105,7 @@ function lint(files, options) {
     .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
 }
 
-gulp.task('lint', function() {
+gulp.task('lint', () => {
   return lint(paths.scripts.input)
     .pipe($.plumber())
     .pipe($.eslint({
@@ -110,12 +114,12 @@ gulp.task('lint', function() {
     .pipe($.eslint.format())
     .pipe(reload({ stream: true }));
 });
-gulp.task('lint:test', function() {
+gulp.task('lint:test', () => {
   return lint(paths.scripts.input)
     .pipe(gulp.dest('test/spec'));
 });
 
-gulp.task('html', ['styles', 'scripts'], function() {
+gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src(paths.html.input)
     .pipe($.if('*.html', fileinclude()))
     .pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
@@ -123,17 +127,17 @@ gulp.task('html', ['styles', 'scripts'], function() {
     .pipe(gulp.dest(paths.html.output));
 });
 
-gulp.task('images', function() {
+gulp.task('images', () => {
   return gulp.src(paths.images.input)
     .pipe(gulp.dest(paths.images.output));
 });
 
-gulp.task('fonts', function() {
+gulp.task('fonts', () => {
   return gulp.src(paths.fonts.input)
     .pipe($.if(dev, gulp.dest(paths.fonts.tmp), gulp.dest(paths.fonts.output)));
 });
 
-gulp.task('favicons', function() {
+gulp.task('favicons', () => {
   return gulp.src(require('main-bower-files')('**/*.{jpeg,jpg,png,svg,gif,ico}', function(err) {
   })
     .concat(paths.favicons.input))
@@ -141,7 +145,7 @@ gulp.task('favicons', function() {
 });
 
 
-gulp.task('extras', function() {
+gulp.task('extras', () => {
   return gulp.src([
     'app/*',
     '!app/**/*.html'
@@ -152,7 +156,7 @@ gulp.task('extras', function() {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', function() {
+gulp.task('serve', () => {
   runSequence(['clean'], ['fileinclude', 'styles', 'scripts', 'fonts', 'favicons'], function() {
     browserSync.init({
       notify: false,
@@ -179,7 +183,7 @@ gulp.task('serve', function() {
   });
 });
 
-gulp.task('serve:dist', ['default'], function() {
+gulp.task('serve:dist', ['default'], () => {
   browserSync.init({
     notify: false,
     port: 9000,
@@ -189,7 +193,7 @@ gulp.task('serve:dist', ['default'], function() {
   });
 });
 
-gulp.task('serve:test', ['scripts'], function() {
+gulp.task('serve:test', ['scripts'], () => {
   browserSync.init({
     notify: false,
     port: 9000,
