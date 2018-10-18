@@ -14,16 +14,12 @@ Install Global Dependencies:
 
 Install Project Dependencies:
 
-    $ npm install
-    
-or
-
     $ yarn
 
 Run Development Mode:
 
-    $ gulp serve
+    $ yarn start
 
 Prepare Build:
 
-    $ gulp build
+    $ yarn build

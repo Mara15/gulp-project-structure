@@ -1,18 +1,17 @@
 'use strict';
-
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
 import runSequence from 'run-sequence';
 import fileinclude from 'gulp-file-include';
-import browserSyncPachage from 'browser-sync';
+import browserSyncPackage from 'browser-sync';
 import '@babel/register';
 import 'gulp-autoprefixer';
 import 'gulp-uglify';
 
 const $ = gulpLoadPlugins();
-const reload = browserSyncPachage.reload;
-const browserSync = browserSyncPachage.create();
+const reload = browserSyncPackage.reload;
+const browserSync = browserSyncPackage.create();
 
 let dev = true;
 
@@ -76,7 +75,7 @@ gulp.task('styles', () => {
     .pipe($.autoprefixer({ browsers: ['last 6 versions', 'Firefox ESR'] }))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(paths.styles.tmp))
-    .pipe(reload({ stream: true }));
+    .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 gulp.task('scripts', () => {
